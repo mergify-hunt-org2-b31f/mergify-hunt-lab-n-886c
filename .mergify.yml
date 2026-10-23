@@ -1,0 +1,16 @@
+queue_rules:
+  - name: default
+    queue_conditions:
+      - base=main
+    merge_conditions:
+      - base=main
+      - check-success=slow-ci
+    checks_timeout: null
+
+pull_request_rules:
+  - name: automatically queue PRs targeting main
+    conditions:
+      - base=main
+    actions:
+      queue:
+        name: default
